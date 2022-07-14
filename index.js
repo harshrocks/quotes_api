@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const PORT = 12334;
+const PORT = process.env.PORT || 3000;
 const BookRoute = require('./quotes_routes');
 
 require("dotenv").config();
@@ -46,7 +46,6 @@ app.get('/quotes/genre/:genre', (req, res) => {
         console.log(err);
       }
       res.status(200).json(result);
-      // console.log(result);
     }
   )
 });
@@ -70,7 +69,6 @@ app.get('/quotes', (req, res) => {
         console.log(err);
       }
       res.status(200).json(result);
-      // console.log(result);
     }
   )
 });
