@@ -8,7 +8,7 @@ require("dotenv").config();
 app.use('/quotes/api/', BookRoute);
 
 url = "mongodb://localhost:27017";
-mongoose.connect(url, {
+mongoose.connect(process.env.DB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(
