@@ -1,13 +1,37 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 12334;
 const BookRoute = require('./quotes_routes');
+const swaggerJs = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+
 
 require("dotenv").config();
 app.use('/quotes/api/', BookRoute);
 
 url = "mongodb://localhost:27017";
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: 'Quotes API',
+      version: '1.0.0',
+      description: 'API for Quotes',
+      contact: {
+        name: 'Harsh Rocks',
+      },
+      servers:[
+        "https://greatthinkerquotes.herokuapp.com/quotes", 
+        'http://localhost:12334'],
+    }
+  },
+  apis: ['./quotes_routes.js']
+};
+
+const swaggerDocs = swaggerJs(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+
 mongoose.connect(process.env.DB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -25,9 +49,9 @@ const db_collection = mongoose.connection.useDb('hello').collection('Quotes');
 
 var genreList = db_collection.distinct("genre").then(
   (docs) => {
-   global.genres = docs;
+    global.genres = docs;
     // console.log(genres);
-   return docs;
+    return docs;
   }
 );
 console.log(global.genres);
