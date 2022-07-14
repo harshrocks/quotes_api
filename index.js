@@ -20,9 +20,12 @@ const swaggerOptions = {
       contact: {
         name: 'Harsh Rocks',
       },
-      servers:[
-        "https://greatthinkerquotes.herokuapp.com/quotes", 
-        'http://localhost:12334'],
+      servers:[{
+      url:"https://greatthinkerquotes.herokuapp.com/quotes",
+      url: 'http://localhost:12334'
+      }
+      
+      ]
     }
   },
   apis: ['./quotes_routes.js']
