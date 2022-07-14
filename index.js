@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const PORT = process.env.PORT || 12334;
+const PORT = process.env.PORT || 3000;
 const BookRoute = require('./quotes_routes');
 const swaggerJs = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
